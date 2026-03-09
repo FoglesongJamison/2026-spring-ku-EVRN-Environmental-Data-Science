@@ -65,3 +65,6 @@ konza_data %>%
     arrange(desc(mean_pcnt_cover))
 ```
 
+## Next step
+
+Need to demonstrate the use of the `mutate()` function, and then how to use `ggpot2`. Some interesting plots could e looking at the effect of elevation on plant cover.
