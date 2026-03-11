@@ -188,7 +188,7 @@ Attaching package: 'dplyr'</code></pre>
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
-<p>This analysis showed that the largest oercent cover is the <code>NA</code> taxa, which means it likely wasn’t able to be identified, but the highest mean percent cover at %16 across the plots was Fagaceae</p>
+<p>This analysis showed that the largest percent cover is the <code>NA</code> taxa, which means it likely wasn’t able to be identified, but the highest mean percent cover at %16 across the plots was Fagaceae</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#the goal is to calculate the mean percent cover of each family at elevation greater than 390</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>konza_data <span class="sc">%&gt;%</span></span>
@@ -214,6 +214,959 @@ Attaching package: 'dplyr'</code></pre>
 # ℹ 11 more rows</code></pre>
 </div>
 </div>
+<p>Next we’ll learn to use <code>mutate()</code>, which is a function to create a new column based on contents from an existing column</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#select pulls out columns</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#mutate creates a new column and can use current column data</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>konza_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(scientificName, family, percentCover) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">propCover =</span> percentCover <span class="sc">/</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                               scientificName         family
+1                       Schizachyrium scoparium (Michx.) Nash        Poaceae
+2                               Lespedeza violacea (L.) Pers.       Fabaceae
+3                                   Lespedeza capitata Michx.       Fabaceae
+4                                                                           
+5                    Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+6                                  Andropogon gerardii Vitman        Poaceae
+7                              Dalea candida Michx. ex Willd.       Fabaceae
+8                                Sorghastrum nutans (L.) Nash        Poaceae
+9                      Brickellia eupatorioides (L.) Shinners     Asteraceae
+10                                    Amorpha canescens Pursh       Fabaceae
+11                                                                          
+12                   Symphyotrichum ericoides (L.) G.L. Nesom     Asteraceae
+13                                                                          
+14                      Schizachyrium scoparium (Michx.) Nash        Poaceae
+15                 Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+16                                  Asclepias verticillata L. Asclepiadaceae
+17                                Cornus drummondii C.A. Mey.      Cornaceae
+18                                Cornus drummondii C.A. Mey.      Cornaceae
+19                                                                          
+20                                                  Carex sp.     Cyperaceae
+21                                Cornus drummondii C.A. Mey.      Cornaceae
+22                                                                          
+23                                 Andropogon gerardii Vitman        Poaceae
+24                                                  Carex sp.     Cyperaceae
+25                      Schizachyrium scoparium (Michx.) Nash        Poaceae
+26                      Bouteloua curtipendula (Michx.) Torr.        Poaceae
+27                                  Ambrosia psilostachya DC.     Asteraceae
+28                               Sorghastrum nutans (L.) Nash        Poaceae
+29                                 Andropogon gerardii Vitman        Poaceae
+30                                        Panicum virgatum L.        Poaceae
+31                                      Physalis pumila Nutt.     Solanaceae
+32                              Lespedeza violacea (L.) Pers.       Fabaceae
+33                      Schizachyrium scoparium (Michx.) Nash        Poaceae
+34                      Bouteloua curtipendula (Michx.) Torr.        Poaceae
+35                             Baptisia australis (L.) R. Br.       Fabaceae
+36                                                                          
+37                                                                          
+38                   Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+39                                   Vernonia baldwinii Torr.     Asteraceae
+40                                                                          
+41                                Cornus drummondii C.A. Mey.      Cornaceae
+42                   Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+43                                 Andropogon gerardii Vitman        Poaceae
+44                                                                          
+45                                                                          
+46                                                                          
+47                                        Panicum virgatum L.        Poaceae
+48                                                                          
+49                               Salvia azurea Michx. ex Lam.      Lamiaceae
+50                               Euphorbia cyathophora Murray  Euphorbiaceae
+51                      Bouteloua curtipendula (Michx.) Torr.        Poaceae
+52                                                                          
+53                                      Ruellia humilis Nutt.    Acanthaceae
+54            Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+55                                                                          
+56                                  Lespedeza capitata Michx.       Fabaceae
+57                   Symphyotrichum ericoides (L.) G.L. Nesom     Asteraceae
+58                              Lespedeza violacea (L.) Pers.       Fabaceae
+59                                        Tragia ramosa Torr.  Euphorbiaceae
+60                                       Dalea purpurea Vent.       Fabaceae
+61                                      Ruellia humilis Nutt.    Acanthaceae
+62                        Sporobolus compositus (Poir.) Merr.        Poaceae
+63                                Cornus drummondii C.A. Mey.      Cornaceae
+64                               Sorghastrum nutans (L.) Nash        Poaceae
+65                               Solidago missouriensis Nutt.     Asteraceae
+66                              Lespedeza violacea (L.) Pers.       Fabaceae
+67                                    Amorpha canescens Pursh       Fabaceae
+68                                  Ambrosia psilostachya DC.     Asteraceae
+69                                  Asclepias verticillata L. Asclepiadaceae
+70                     Brickellia eupatorioides (L.) Shinners     Asteraceae
+71                                                                          
+72                               Sorghastrum nutans (L.) Nash        Poaceae
+73                                                                          
+74                               Sorghastrum nutans (L.) Nash        Poaceae
+75                          Symphoricarpos orbiculatus Moench Caprifoliaceae
+76                                                  Carex sp.     Cyperaceae
+77                                 Andropogon gerardii Vitman        Poaceae
+78                                                 Carex spp.     Cyperaceae
+79                      Bouteloua curtipendula (Michx.) Torr.        Poaceae
+80                               Solidago missouriensis Nutt.     Asteraceae
+81                              Lespedeza violacea (L.) Pers.       Fabaceae
+82                              Lespedeza violacea (L.) Pers.       Fabaceae
+83                               Salvia azurea Michx. ex Lam.      Lamiaceae
+84                                    Amorpha canescens Pursh       Fabaceae
+85                                                                          
+86                                                                          
+87                      Schizachyrium scoparium (Michx.) Nash        Poaceae
+88                                                                          
+89                                                  Carex sp.     Cyperaceae
+90                                Artemisia ludoviciana Nutt.     Asteraceae
+91                                 Andropogon gerardii Vitman        Poaceae
+92                        Sporobolus compositus (Poir.) Merr.        Poaceae
+93                             Baptisia australis (L.) R. Br.       Fabaceae
+94                     Brickellia eupatorioides (L.) Shinners     Asteraceae
+95                   Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+96                                                                          
+97                      Bouteloua curtipendula (Michx.) Torr.        Poaceae
+98                                    Amorpha canescens Pursh       Fabaceae
+99                                                                          
+100           Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+101                                    Linum sulcatum Riddell       Linaceae
+102                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+103                                   Viola pedatifida G. Don      Violaceae
+104                              Sorghastrum nutans (L.) Nash        Poaceae
+105                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+106                                       Panicum virgatum L.        Poaceae
+107               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+108                                  Ceanothus herbaceus Raf.     Rhamnaceae
+109                                      Viola sororia Willd.      Violaceae
+110               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+111                                                                         
+112                                                                         
+113                                                                         
+114               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+115                                         Ulmus rubra Muhl.       Ulmaceae
+116                                                                         
+117                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+118                                Andropogon gerardii Vitman        Poaceae
+119                                                                         
+120                                                 Ulmus sp.       Ulmaceae
+121                                   Juniperus virginiana L.   Cupressaceae
+122                            Oligoneuron rigidum (L.) Small     Asteraceae
+123                         Symphoricarpos orbiculatus Moench Caprifoliaceae
+124                              Sorghastrum nutans (L.) Nash        Poaceae
+125                               Tridens flavus (L.) Hitchc.        Poaceae
+126                                                                         
+127                                Andropogon gerardii Vitman        Poaceae
+128           Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+129                                    Bouteloua hirsuta Lag.        Poaceae
+130            Stenosiphon linifolius (Nutt. ex James) Heynh.     Onagraceae
+131                                Lithospermum incisum Lehm.   Boraginaceae
+132                                            Rhus glabra L.  Anacardiaceae
+133                                                                         
+134                                  Helianthus hirsutus Raf.     Asteraceae
+135                                Andropogon gerardii Vitman        Poaceae
+136                               Cornus drummondii C.A. Mey.      Cornaceae
+137                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+138                        Toxicodendron radicans (L.) Kuntze  Anacardiaceae
+139                  Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+140                                 Asclepias verticillata L. Asclepiadaceae
+141                                       Tragia ramosa Torr.  Euphorbiaceae
+142                                                                         
+143                              Sorghastrum nutans (L.) Nash        Poaceae
+144         Desmodium glutinosum (Muhl. ex Willd.) Alph. Wood       Fabaceae
+145                                                                         
+146       Onosmodium bejariense DC. ex A. DC. var. bejariense   Boraginaceae
+147                         Symphoricarpos orbiculatus Moench Caprifoliaceae
+148                                                                         
+149                              Sorghastrum nutans (L.) Nash        Poaceae
+150      Mimosa nuttallii (DC. ex Britton &amp; Rose) B.L. Turner       Fabaceae
+151                                                                         
+152                                   Amorpha canescens Pursh       Fabaceae
+153                                                 Carex sp.     Cyperaceae
+154                       Sporobolus compositus (Poir.) Merr.        Poaceae
+155                                     Celastrus scandens L.   Celastraceae
+156                            Oligoneuron rigidum (L.) Small     Asteraceae
+157                                  Helianthus hirsutus Raf.     Asteraceae
+158                                                                         
+159                                 Asclepias verticillata L. Asclepiadaceae
+160                                                                         
+161                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+162                                                                         
+163                                                                         
+164                                                                         
+165                                      Dalea purpurea Vent.       Fabaceae
+166                                  Helianthus hirsutus Raf.     Asteraceae
+167                                    Bouteloua hirsuta Lag.        Poaceae
+168                                                                         
+169                               Cornus drummondii C.A. Mey.      Cornaceae
+170                    Brickellia eupatorioides (L.) Shinners     Asteraceae
+171                                                                         
+172                                 Asclepias verticillata L. Asclepiadaceae
+173                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+174                                Andropogon gerardii Vitman        Poaceae
+175                                                                         
+176                              Sorghastrum nutans (L.) Nash        Poaceae
+177                                    Liatris punctata Hook.     Asteraceae
+178                                                                         
+179                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+180               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+181                                   Amorpha canescens Pursh       Fabaceae
+182                                  Helianthus hirsutus Raf.     Asteraceae
+183                                      Viola sororia Willd.      Violaceae
+184           Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+185                                                                         
+186                                 Asclepias verticillata L. Asclepiadaceae
+187                                                                         
+188                                    Bouteloua hirsuta Lag.        Poaceae
+189                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+190           Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+191                    Brickellia eupatorioides (L.) Shinners     Asteraceae
+192               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+193                                                 Carex sp.     Cyperaceae
+194                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+195                                 Asclepias verticillata L. Asclepiadaceae
+196         Desmodium glutinosum (Muhl. ex Willd.) Alph. Wood       Fabaceae
+197                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+198                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+199                         Stenaria nigricans (Lam.) Terrell      Rubiaceae
+200                                Andropogon gerardii Vitman        Poaceae
+201                                                 Carex sp.     Cyperaceae
+202                                  Ceanothus herbaceus Raf.     Rhamnaceae
+203                                                                         
+204                                                                         
+205                                                                         
+206                                                                         
+207                                    Liatris punctata Hook.     Asteraceae
+208                                                                         
+209                                  Ceanothus herbaceus Raf.     Rhamnaceae
+210                               Cornus drummondii C.A. Mey.      Cornaceae
+211                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+212                                 Ambrosia psilostachya DC.     Asteraceae
+213                                       Tragia ramosa Torr.  Euphorbiaceae
+214             Symphyotrichum drummondii (Lindl.) G.L. Nesom     Asteraceae
+215                            Chamaesyce nutans (Lag.) Small  Euphorbiaceae
+216                                   Viola pedatifida G. Don      Violaceae
+217                                                                         
+218                                                                         
+219                                                                         
+220                                 Asclepias verticillata L. Asclepiadaceae
+221                                                                         
+222                                  Galium circaezans Michx.      Rubiaceae
+223                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+224                                Andropogon gerardii Vitman        Poaceae
+225                                  Ceanothus herbaceus Raf.     Rhamnaceae
+226                              Zizia aurea (L.) W.D.J. Koch       Apiaceae
+227                Symphyotrichum sericeum (Vent.) G.L. Nesom     Asteraceae
+228                                                                         
+229                                 Asclepias verticillata L. Asclepiadaceae
+230                                                                         
+231                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+232                                     Celastrus scandens L.   Celastraceae
+233                                                                         
+234                            Oligoneuron rigidum (L.) Small     Asteraceae
+235                                                                         
+236                                                                         
+237                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+238               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+239                                                                         
+240                                  Ceanothus herbaceus Raf.     Rhamnaceae
+241           Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+242                                                                         
+243                              Sorghastrum nutans (L.) Nash        Poaceae
+244                               Cornus drummondii C.A. Mey.      Cornaceae
+245                                                                         
+246                Symphyotrichum sericeum (Vent.) G.L. Nesom     Asteraceae
+247                             Lespedeza violacea (L.) Pers.       Fabaceae
+248               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+249         Desmodium glutinosum (Muhl. ex Willd.) Alph. Wood       Fabaceae
+250                                                 Carex sp.     Cyperaceae
+251                                    Bouteloua hirsuta Lag.        Poaceae
+252                      Chamaesyce missurica (Raf.) Shinners  Euphorbiaceae
+253                                                                         
+254                                                                         
+255                                    Liatris punctata Hook.     Asteraceae
+256                                                                         
+257                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+258      Mimosa nuttallii (DC. ex Britton &amp; Rose) B.L. Turner       Fabaceae
+259                                Echinacea angustifolia DC.     Asteraceae
+260                                      Cercis canadensis L.       Fabaceae
+261                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+262                                    Liatris punctata Hook.     Asteraceae
+263                                                                         
+264                                                                         
+265                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+266                                                 Carex sp.     Cyperaceae
+267                Symphyotrichum sericeum (Vent.) G.L. Nesom     Asteraceae
+268                                                                         
+269                                                                         
+270                                   Juniperus virginiana L.   Cupressaceae
+271                                  Helianthus hirsutus Raf.     Asteraceae
+272                       Amphicarpaea bracteata (L.) Fernald       Fabaceae
+273                      Chamaesyce missurica (Raf.) Shinners  Euphorbiaceae
+274                                                 Carex sp.     Cyperaceae
+275                                   Amorpha canescens Pursh       Fabaceae
+276                  Symphyotrichum ericoides (L.) G.L. Nesom     Asteraceae
+277                                Andropogon gerardii Vitman        Poaceae
+278                                                                         
+279                              Sorghastrum nutans (L.) Nash        Poaceae
+280                                                                         
+281                                                                         
+282                                       Panicum virgatum L.        Poaceae
+283                                 Ambrosia psilostachya DC.     Asteraceae
+284                                   Amorpha canescens Pursh       Fabaceae
+285                                                                         
+286                                                                         
+287                                     Oxalis dillenii Jacq.    Oxalidaceae
+288                                  Galium circaezans Michx.      Rubiaceae
+289                              Zanthoxylum americanum Mill.       Rutaceae
+290      Mimosa nuttallii (DC. ex Britton &amp; Rose) B.L. Turner       Fabaceae
+291                  Symphyotrichum ericoides (L.) G.L. Nesom     Asteraceae
+292                                                                         
+293                                       Panicum virgatum L.        Poaceae
+294                                   Amorpha canescens Pursh       Fabaceae
+295                                                                         
+296                                                                         
+297       Onosmodium bejariense DC. ex A. DC. var. bejariense   Boraginaceae
+298                      Chamaesyce missurica (Raf.) Shinners  Euphorbiaceae
+299                                                                         
+300                    Brickellia eupatorioides (L.) Shinners     Asteraceae
+301                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+302                                                                         
+303                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+304                            Oligoneuron rigidum (L.) Small     Asteraceae
+305           Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+306                                                                         
+307                            Chamaesyce nutans (Lag.) Small  Euphorbiaceae
+308                                                                         
+309                    Brickellia eupatorioides (L.) Shinners     Asteraceae
+310                Symphyotrichum sericeum (Vent.) G.L. Nesom     Asteraceae
+311                                            Rhus glabra L.  Anacardiaceae
+312                  Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+313                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+314                                  Galium circaezans Michx.      Rubiaceae
+315                                Andropogon gerardii Vitman        Poaceae
+316                                      Viola sororia Willd.      Violaceae
+317                             Comandra umbellata (L.) Nutt.    Santalaceae
+318                                                                         
+319               Symphyotrichum laeve (L.) Á. Löve &amp; D. Löve     Asteraceae
+320                                               Quercus sp.       Fagaceae
+321                       Sporobolus compositus (Poir.) Merr.        Poaceae
+322                              Sorghastrum nutans (L.) Nash        Poaceae
+323                              Sorghastrum nutans (L.) Nash        Poaceae
+324                                                                         
+325                                   Amorpha canescens Pursh       Fabaceae
+326           Symphyotrichum oblongifolium (Nutt.) G.L. Nesom     Asteraceae
+327      Mimosa nuttallii (DC. ex Britton &amp; Rose) B.L. Turner       Fabaceae
+328                                Andropogon gerardii Vitman        Poaceae
+329                                  Polygala verticillata L.   Polygalaceae
+330                                  Eupatorium altissimum L.     Asteraceae
+331                                                                         
+332                                                                         
+333                        Toxicodendron radicans (L.) Kuntze  Anacardiaceae
+334                                Asclepias viridiflora Raf. Asclepiadaceae
+335                                 Ambrosia psilostachya DC.     Asteraceae
+336                                      Elymus virginicus L.        Poaceae
+337                  Symphyotrichum ericoides (L.) G.L. Nesom     Asteraceae
+338                                 Ambrosia psilostachya DC.     Asteraceae
+339                                                                         
+340                                   Amorpha canescens Pursh       Fabaceae
+341                                  Vernonia baldwinii Torr.     Asteraceae
+342                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+343                                                                         
+344         Dichanthelium acuminatum (Sw.) Gould &amp; C.A. Clark        Poaceae
+345                                                                         
+346                                                                         
+347                                   Amorpha canescens Pursh       Fabaceae
+348                                     Oxalis dillenii Jacq.    Oxalidaceae
+349                             Lespedeza violacea (L.) Pers.       Fabaceae
+350                  Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+351                                Andropogon gerardii Vitman        Poaceae
+352                                      Asclepias syriaca L. Asclepiadaceae
+353                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+354                                                                         
+355                                                                         
+356                  Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+357                               Tridens flavus (L.) Hitchc.        Poaceae
+358                                     Solidago altissima L.     Asteraceae
+359                                   Amorpha canescens Pursh       Fabaceae
+360                               Artemisia ludoviciana Nutt.     Asteraceae
+361                                                                         
+362                                                                         
+363                     Eragrostis spectabilis (Pursh) Steud.        Poaceae
+364                                                                         
+365                                      Lythrum alatum Pursh     Lythraceae
+366                                     Physalis pumila Nutt.     Solanaceae
+367                              Salvia azurea Michx. ex Lam.      Lamiaceae
+368                                     Physalis pumila Nutt.     Solanaceae
+369                                                                         
+370                               Artemisia ludoviciana Nutt.     Asteraceae
+371                                                 Carex sp.     Cyperaceae
+372                                     Teucrium canadense L.      Lamiaceae
+373                                  Vernonia baldwinii Torr.     Asteraceae
+374                                                                         
+375                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+376                                  Vernonia baldwinii Torr.     Asteraceae
+377                                  Euphorbia davidii Subils  Euphorbiaceae
+378                                                                         
+379                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+380                                     Teucrium canadense L.      Lamiaceae
+381                                     Ruellia humilis Nutt.    Acanthaceae
+382                       Sporobolus compositus (Poir.) Merr.        Poaceae
+383                                                                         
+384                                                                         
+385                                Andropogon gerardii Vitman        Poaceae
+386                                                                         
+387                                                 Carex sp.     Cyperaceae
+388                             Lespedeza violacea (L.) Pers.       Fabaceae
+389                                                                         
+390                                     Oxalis dillenii Jacq.    Oxalidaceae
+391                                                                         
+392                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+393                                       Panicum virgatum L.        Poaceae
+394                                                                         
+395                               Cornus drummondii C.A. Mey.      Cornaceae
+396 Muhlenbergia racemosa (Michx.) Britton, Sterns &amp; Poggenb.        Poaceae
+397                     Schizachyrium scoparium (Michx.) Nash        Poaceae
+398                                                                         
+399                                Andropogon gerardii Vitman        Poaceae
+400                                Andropogon gerardii Vitman        Poaceae
+401                                                                         
+402                                     Acalypha virginica L.  Euphorbiaceae
+403                                                                         
+404                               Tridens flavus (L.) Hitchc.        Poaceae
+405                         Mirabilis albida (Walter) Heimerl  Nyctaginaceae
+406                              Sorghastrum nutans (L.) Nash        Poaceae
+407                                                 Carex sp.     Cyperaceae
+408                               Cornus drummondii C.A. Mey.      Cornaceae
+409                              Zanthoxylum americanum Mill.       Rutaceae
+410                              Sorghastrum nutans (L.) Nash        Poaceae
+411                                 Ambrosia psilostachya DC.     Asteraceae
+412                                     Rosa arkansana Porter       Rosaceae
+413                                     Physalis pumila Nutt.     Solanaceae
+414                              Sorghastrum nutans (L.) Nash        Poaceae
+415                                                                         
+416                  Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+417                            Chamaesyce nutans (Lag.) Small  Euphorbiaceae
+418                                     Solidago altissima L.     Asteraceae
+419                                                                         
+420                                 Ambrosia psilostachya DC.     Asteraceae
+421                                                                         
+422                                 Ambrosia psilostachya DC.     Asteraceae
+423                                     Solidago altissima L.     Asteraceae
+424                                     Solidago altissima L.     Asteraceae
+425                                    Solanum carolinense L.     Solanaceae
+426                         Digitaria cognata (Schult.) Pilg.        Poaceae
+427                     Bouteloua curtipendula (Michx.) Torr.        Poaceae
+428                                  Euphorbia dentata Michx.  Euphorbiaceae
+429                                                                         
+430                                       Panicum virgatum L.        Poaceae
+431                                                                         
+432                  Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+433                                 Ambrosia psilostachya DC.     Asteraceae
+434                                                                         
+435                                     Teucrium canadense L.      Lamiaceae
+436                            Oligoneuron rigidum (L.) Small     Asteraceae
+437                               Cornus drummondii C.A. Mey.      Cornaceae
+438                                                 Carex sp.     Cyperaceae
+439                             Lespedeza violacea (L.) Pers.       Fabaceae
+440                                                 Carex sp.     Cyperaceae
+441                                                                         
+442                                 Ambrosia psilostachya DC.     Asteraceae
+443                                     Physalis pumila Nutt.     Solanaceae
+444                                     Rosa arkansana Porter       Rosaceae
+445                  Sporobolus heterolepis (A. Gray) A. Gray        Poaceae
+446                       Sporobolus compositus (Poir.) Merr.        Poaceae
+447                                                                         
+448                              Sorghastrum nutans (L.) Nash        Poaceae
+449                                 Lespedeza capitata Michx.       Fabaceae
+450                                     Rosa arkansana Porter       Rosaceae
+451                                Andropogon gerardii Vitman        Poaceae
+452                       Sporobolus compositus (Poir.) Merr.        Poaceae
+453                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+454                         Symphoricarpos orbiculatus Moench Caprifoliaceae
+455                                                 Carex sp.     Cyperaceae
+456                                     Verbena stricta Vent.    Verbenaceae
+457                                   Amorpha canescens Pursh       Fabaceae
+458                                       Panicum virgatum L.        Poaceae
+459                                 Asclepias verticillata L. Asclepiadaceae
+460                                     Teucrium canadense L.      Lamiaceae
+461                                 Lespedeza capitata Michx.       Fabaceae
+462                              Desmodium illinoense A. Gray       Fabaceae
+463                                     Physalis pumila Nutt.     Solanaceae
+464                                               Cuscuta sp.    Cuscutaceae
+465                              Sorghastrum nutans (L.) Nash        Poaceae
+466                                     Solidago altissima L.     Asteraceae
+467                Dichanthelium oligosanthes (Schult.) Gould        Poaceae
+468                                                                         
+    percentCover propCover
+1            7.0     0.070
+2            8.0     0.080
+3            1.0     0.010
+4            2.0     0.020
+5            4.0     0.040
+6           10.0     0.100
+7            0.5     0.005
+8            5.0     0.050
+9            3.0     0.030
+10           2.0     0.020
+11          93.0     0.930
+12           3.0     0.030
+13           3.0     0.030
+14           2.0     0.020
+15           0.5     0.005
+16           1.0     0.010
+17           2.0     0.020
+18           4.0     0.040
+19          95.0     0.950
+20           0.5     0.005
+21          10.0     0.100
+22           3.0     0.030
+23           8.0     0.080
+24           0.5     0.005
+25           7.0     0.070
+26           0.5     0.005
+27           0.5     0.005
+28           0.5     0.005
+29           4.0     0.040
+30           8.0     0.080
+31           1.0     0.010
+32          10.0     0.100
+33           4.0     0.040
+34           3.0     0.030
+35           3.0     0.030
+36          95.0     0.950
+37           0.5     0.005
+38           0.5     0.005
+39           0.5     0.005
+40           5.0     0.050
+41           2.0     0.020
+42           1.0     0.010
+43          10.0     0.100
+44           7.0     0.070
+45          91.0     0.910
+46           2.0     0.020
+47           6.0     0.060
+48           1.0     0.010
+49           1.0     0.010
+50           0.5     0.005
+51           5.0     0.050
+52           0.5     0.005
+53           0.5     0.005
+54           0.5     0.005
+55           1.0     0.010
+56           0.5     0.005
+57           3.0     0.030
+58          23.0     0.230
+59           0.5     0.005
+60           0.5     0.005
+61           0.5     0.005
+62           2.0     0.020
+63           5.0     0.050
+64          16.0     0.160
+65           0.5     0.005
+66           2.0     0.020
+67           3.0     0.030
+68           0.5     0.005
+69           0.5     0.005
+70           0.5     0.005
+71           1.0     0.010
+72           2.0     0.020
+73           1.0     0.010
+74           4.0     0.040
+75           1.0     0.010
+76           0.5     0.005
+77          11.0     0.110
+78           0.5     0.005
+79           3.0     0.030
+80           0.5     0.005
+81          35.0     0.350
+82           0.5     0.005
+83           3.0     0.030
+84          20.0     0.200
+85          89.0     0.890
+86           2.0     0.020
+87          10.0     0.100
+88           6.0     0.060
+89           0.5     0.005
+90           0.5     0.005
+91          13.0     0.130
+92           0.5     0.005
+93           2.0     0.020
+94           0.5     0.005
+95           0.5     0.005
+96          94.0     0.940
+97           0.5     0.005
+98           7.0     0.070
+99           9.0     0.090
+100          2.0     0.020
+101          0.5     0.005
+102          2.0     0.020
+103          0.5     0.005
+104         12.0     0.120
+105          0.5     0.005
+106          6.0     0.060
+107          0.5     0.005
+108          2.0     0.020
+109          0.5     0.005
+110          2.0     0.020
+111          0.5     0.005
+112          2.0     0.020
+113          0.5     0.005
+114          0.5     0.005
+115          3.0     0.030
+116          0.5     0.005
+117          6.0     0.060
+118         11.0     0.110
+119          4.0     0.040
+120          5.0     0.050
+121          0.5     0.005
+122          2.0     0.020
+123          0.5     0.005
+124          3.0     0.030
+125          0.5     0.005
+126          1.0     0.010
+127         11.0     0.110
+128          2.0     0.020
+129          1.0     0.010
+130          0.5     0.005
+131          0.5     0.005
+132          3.0     0.030
+133          0.5     0.005
+134          2.0     0.020
+135          9.0     0.090
+136         10.0     0.100
+137          3.0     0.030
+138          6.0     0.060
+139          2.0     0.020
+140          0.5     0.005
+141          0.5     0.005
+142         51.0     0.510
+143          1.0     0.010
+144         17.0     0.170
+145          0.5     0.005
+146          5.0     0.050
+147          0.5     0.005
+148         12.0     0.120
+149          0.5     0.005
+150          0.5     0.005
+151         87.0     0.870
+152          2.0     0.020
+153          2.0     0.020
+154          1.0     0.010
+155          3.0     0.030
+156          1.0     0.010
+157          0.5     0.005
+158         91.0     0.910
+159          0.5     0.005
+160          0.5     0.005
+161          2.0     0.020
+162          0.5     0.005
+163         24.0     0.240
+164          3.0     0.030
+165          0.5     0.005
+166          3.0     0.030
+167          2.0     0.020
+168          0.5     0.005
+169         16.0     0.160
+170          0.5     0.005
+171          4.0     0.040
+172          5.0     0.050
+173         10.0     0.100
+174         11.0     0.110
+175         96.0     0.960
+176          0.5     0.005
+177          2.0     0.020
+178          0.5     0.005
+179          4.0     0.040
+180          0.5     0.005
+181          1.0     0.010
+182         10.0     0.100
+183          0.5     0.005
+184          0.5     0.005
+185          0.5     0.005
+186          0.5     0.005
+187         36.0     0.360
+188          0.5     0.005
+189         13.0     0.130
+190          0.5     0.005
+191          0.5     0.005
+192          0.5     0.005
+193          4.0     0.040
+194          9.0     0.090
+195          0.5     0.005
+196          3.0     0.030
+197          8.0     0.080
+198          0.5     0.005
+199          0.5     0.005
+200         10.0     0.100
+201          0.5     0.005
+202          1.0     0.010
+203          0.5     0.005
+204         13.0     0.130
+205          0.5     0.005
+206          7.0     0.070
+207          1.0     0.010
+208         88.0     0.880
+209          3.0     0.030
+210          7.0     0.070
+211         10.0     0.100
+212          0.5     0.005
+213          0.5     0.005
+214          4.0     0.040
+215          0.5     0.005
+216          0.5     0.005
+217         11.0     0.110
+218         28.0     0.280
+219          0.5     0.005
+220          1.0     0.010
+221          4.0     0.040
+222          0.5     0.005
+223          8.0     0.080
+224          8.0     0.080
+225          9.0     0.090
+226          1.0     0.010
+227          0.5     0.005
+228         20.0     0.200
+229          1.0     0.010
+230          0.5     0.005
+231          4.0     0.040
+232          1.0     0.010
+233          1.0     0.010
+234          2.0     0.020
+235          0.5     0.005
+236          0.5     0.005
+237          4.0     0.040
+238          2.0     0.020
+239         80.0     0.800
+240          4.0     0.040
+241          1.0     0.010
+242          0.5     0.005
+243          4.0     0.040
+244         11.0     0.110
+245          1.0     0.010
+246          0.5     0.005
+247          3.0     0.030
+248          2.0     0.020
+249          0.5     0.005
+250          4.0     0.040
+251          1.0     0.010
+252          1.0     0.010
+253          1.0     0.010
+254         39.0     0.390
+255          0.5     0.005
+256         82.0     0.820
+257          6.0     0.060
+258          0.5     0.005
+259          0.5     0.005
+260         11.0     0.110
+261          0.5     0.005
+262          1.0     0.010
+263          0.5     0.005
+264          0.5     0.005
+265         19.0     0.190
+266          0.5     0.005
+267          0.5     0.005
+268         81.0     0.810
+269         10.0     0.100
+270          0.5     0.005
+271          1.0     0.010
+272          1.0     0.010
+273          2.0     0.020
+274          0.5     0.005
+275          5.0     0.050
+276          0.5     0.005
+277          7.0     0.070
+278          0.5     0.005
+279          4.0     0.040
+280         67.0     0.670
+281          0.5     0.005
+282          4.0     0.040
+283          0.5     0.005
+284          0.5     0.005
+285          1.0     0.010
+286          3.0     0.030
+287          0.5     0.005
+288          2.0     0.020
+289          1.0     0.010
+290          0.5     0.005
+291          0.5     0.005
+292         45.0     0.450
+293          0.5     0.005
+294          3.0     0.030
+295          0.5     0.005
+296          5.0     0.050
+297          0.5     0.005
+298          0.5     0.005
+299          7.0     0.070
+300          1.0     0.010
+301          5.0     0.050
+302         71.0     0.710
+303          0.5     0.005
+304          0.5     0.005
+305          3.0     0.030
+306          1.0     0.010
+307          0.5     0.005
+308          0.5     0.005
+309          0.5     0.005
+310          3.0     0.030
+311          3.0     0.030
+312          1.0     0.010
+313          5.0     0.050
+314          0.5     0.005
+315          4.0     0.040
+316          1.0     0.010
+317          2.0     0.020
+318          6.0     0.060
+319          1.0     0.010
+320         16.0     0.160
+321          0.5     0.005
+322          2.0     0.020
+323          0.5     0.005
+324          0.5     0.005
+325          2.0     0.020
+326          1.0     0.010
+327          0.5     0.005
+328          7.0     0.070
+329          0.5     0.005
+330          1.0     0.010
+331         92.0     0.920
+332         25.0     0.250
+333          3.0     0.030
+334          0.5     0.005
+335          0.5     0.005
+336          0.5     0.005
+337          1.0     0.010
+338          0.5     0.005
+339          2.0     0.020
+340          1.0     0.010
+341          1.0     0.010
+342          1.0     0.010
+343          4.0     0.040
+344          0.5     0.005
+345         94.0     0.940
+346          1.0     0.010
+347          6.0     0.060
+348          1.0     0.010
+349          0.5     0.005
+350          0.5     0.005
+351          8.0     0.080
+352          0.5     0.005
+353          0.5     0.005
+354          1.0     0.010
+355         18.0     0.180
+356          3.0     0.030
+357          2.0     0.020
+358         11.0     0.110
+359          0.5     0.005
+360          2.0     0.020
+361          3.0     0.030
+362          0.5     0.005
+363          0.5     0.005
+364          3.0     0.030
+365          2.0     0.020
+366          2.0     0.020
+367          2.0     0.020
+368          1.0     0.010
+369         90.0     0.900
+370          0.5     0.005
+371          5.0     0.050
+372          2.0     0.020
+373          5.0     0.050
+374          0.5     0.005
+375          0.5     0.005
+376          3.0     0.030
+377          0.5     0.005
+378         78.0     0.780
+379          1.0     0.010
+380          0.5     0.005
+381          1.0     0.010
+382          1.0     0.010
+383          0.5     0.005
+384          8.0     0.080
+385          9.0     0.090
+386          3.0     0.030
+387          3.0     0.030
+388          4.0     0.040
+389         93.0     0.930
+390          0.5     0.005
+391          0.5     0.005
+392          0.5     0.005
+393          3.0     0.030
+394          1.0     0.010
+395          6.0     0.060
+396          3.0     0.030
+397          3.0     0.030
+398          5.0     0.050
+399          6.0     0.060
+400         23.0     0.230
+401          2.0     0.020
+402          0.5     0.005
+403         10.0     0.100
+404          1.0     0.010
+405          0.5     0.005
+406          2.0     0.020
+407          3.0     0.030
+408          7.0     0.070
+409          3.0     0.030
+410         18.0     0.180
+411          0.5     0.005
+412          2.0     0.020
+413          3.0     0.030
+414          5.0     0.050
+415          0.5     0.005
+416         94.0     0.940
+417          0.5     0.005
+418         11.0     0.110
+419          0.5     0.005
+420          0.5     0.005
+421          7.0     0.070
+422          1.0     0.010
+423         28.0     0.280
+424         12.0     0.120
+425          0.5     0.005
+426          0.5     0.005
+427          2.0     0.020
+428          0.5     0.005
+429          0.5     0.005
+430          0.5     0.005
+431         83.0     0.830
+432          4.0     0.040
+433          4.0     0.040
+434          5.0     0.050
+435          0.5     0.005
+436          4.0     0.040
+437          1.0     0.010
+438          1.0     0.010
+439          0.5     0.005
+440          1.0     0.010
+441          0.5     0.005
+442          2.0     0.020
+443          0.5     0.005
+444          1.0     0.010
+445          4.0     0.040
+446          1.0     0.010
+447          0.5     0.005
+448          4.0     0.040
+449          2.0     0.020
+450          4.0     0.040
+451         12.0     0.120
+452          6.0     0.060
+453          0.5     0.005
+454          0.5     0.005
+455          0.5     0.005
+456          1.0     0.010
+457          9.0     0.090
+458          5.0     0.050
+459          0.5     0.005
+460          1.0     0.010
+461          8.0     0.080
+462          6.0     0.060
+463          1.0     0.010
+464          0.5     0.005
+465          2.0     0.020
+466         25.0     0.250
+467          1.0     0.010
+468         89.0     0.890</code></pre>
+</div>
+</div>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next step</h2>
+<p>Need to demonstrate the use of the <code>mutate()</code> function, and then how to use <code>ggpot2</code>. Some interesting plots could be looking at the effect of elevation on plant cover.</p>
 </section>
 
 </main>
