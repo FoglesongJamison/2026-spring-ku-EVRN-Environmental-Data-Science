@@ -2,6 +2,10 @@
 title: "Konza_Vegetation_Analysis"
 author: "Jamison Foglesong"
 format: html
+execute:
+  echo: false
+  Warning: false
+  error: false
 ---
 
 ## Introduction
@@ -16,9 +20,12 @@ The data are provided in csv files. We'll use the tidyverse package `readr` to l
 #| label: read-csv
 
 # load packages
+
 library("readr")
 library("dplyr")
 library("ggplot2")
+library("ggthemes")
+library("knitr")
 
 #read in the data
 konza_data <- read.csv("data/raw data/NEON.D06.KONZ.DP1.10058.001.div_1m2Data.2025-08.basic.20251222T234053Z.csv")
@@ -35,7 +42,8 @@ We'll next use the dplyr package to summarize some different aspects of the data
 konza_data %>%
   group_by(family) %>%
   tally() %>%
-  arrange(desc(n))
+  arrange(desc(n)) %>%
+  kable()
 ```
 
 This analysis showed that Poaceae and Asteraceae are among the most common family found in these plots.
@@ -48,7 +56,8 @@ konza_data %>%
   group_by(family) %>%
   summarise(mean_pcnt_cover = mean(percentCover),
             sd_pcnt_cover = sd(percentCover)) %>%
-    arrange(desc(mean_pcnt_cover))
+    arrange(desc(mean_pcnt_cover)) %>%
+  kable()
 ```
 
 This analysis showed that the largest percent cover is the `NA` taxa, which means it likely wasn't able to be identified, but the highest mean percent cover at %16 across the plots was Fagaceae
@@ -85,16 +94,15 @@ Next up, we'll use `ggplot2` to make some figures
 
 konza_data %>%
   filter(!is.na(family)) %>%
-  filter(family == "Asteracaea" | family == "Poaceae") %>%
-  ggplot(aes(x = elevation,
-           y = percentCover,
-           color = family)) +
-  geom_point() +
-  geom_smooth() +
-  labs(title = "Comparison of Asteraceae and Poaceae by elevation",
-       y = "Percent Cover",
-       x = "Elevation (m)")
+  ggplot(aes(x = percentCover)) +
+  geom_histogram() +
+  labs(title = "Histogram of percent cover, all species",
+       x = "Percent Cover") 
+  show.legend = TRUE 
+  theme_get()
 ```
+
+
 This concludes the sample exercises completed in class.
 
 ## Practicing exploratory data analysis
@@ -108,9 +116,6 @@ This figure explores the relative species variation of the subplots observed in 
 ```{r}
 #|label: diversity-by-subplot
 
-species_count <-
-konza_data %>%
-  group_size(subplotID)
 
 
 
