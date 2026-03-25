@@ -78,7 +78,7 @@ konza_data %>%
   mutate(propCover = percentCover / 100)
 ```
 
-Next up, wel'll use `ggplot2` to make some figures
+Next up, we'll use `ggplot2` to make some figures
 
 ```{r}
 #|label: elevation-percent-by-family
@@ -95,8 +95,7 @@ konza_data %>%
        y = "Percent Cover",
        x = "Elevation (m)")
 ```
+This concludes the sample exercises completed in class.
 
-## Next step
-
-Need to demonstrate the use of the `mutate()` function, and then how to use `ggpot2`. Some interesting plots could be looking at the effect of elevation on plant cover.
+## Practicing exploratory data analysis
 
