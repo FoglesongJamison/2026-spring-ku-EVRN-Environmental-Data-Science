@@ -99,3 +99,23 @@ This concludes the sample exercises completed in class.
 
 ## Practicing exploratory data analysis
 
+I will be creating 3 plots analyzing the Konza NEON data to practice using `dplyer`
+and `ggplot2` to explore and analyze data
+
+## Figure 1 - Diversity by subplot
+This figure explores the relative species variation of the subplots observed in the NEON data.
+
+```{r}
+#|label: diversity-by-subplot
+
+species_count <-
+konza_data %>%
+  group_size(subplotID)
+
+
+
+
+  
+```
+
+
