@@ -115,12 +115,17 @@ This figure explores the relative species variation of the subplots observed in 
 
 ```{r}
 #|label: diversity-by-subplot
+taxontibble <- tibble(x = konza_data$taxonID)
 
-
-
-
-
-  
+konza_data %>%  
+  group_by(subplotID) %>%
+  ggplot(aes(x = subplotID, y = count(taxontibble, name = "Unique Species"))) +
+         geom_bar() +
+           labs(title = "Count of Unique Species per Subplot", x = "Subplot (ID number)", y = "amount of unique species")
+         
 ```
+I am abandoning this figure, I have wasted too much time hyper fixated on how to
+format discrete data into something usable for the x-axis of my plot.
+
 
 
