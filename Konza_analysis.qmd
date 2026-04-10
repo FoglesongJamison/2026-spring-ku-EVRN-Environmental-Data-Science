@@ -131,12 +131,18 @@ format discrete data into something usable for the x-axis of my plot.
 
 ## Figure 1 -
 ```{r}
-#|llabel: idk-yet
+#|llabel: Land Cover Variables
   
 konza_data %>%
   filter(!is.na(otherVariables)) %>%
   ggplot(aes(x = otherVariables)) +
-  geom_bar(na.rm = TRUE,)
+  geom_bar(
+    na.rm = FALSE,
+           position = position_dodge2(preserve = "single")) +
+           theme(
+             axis.text.x.bottom = element_text(
+               margin = margin(t = 50, unit = "pt"),
+              angle = 80))
 ```
 
 
