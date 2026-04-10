@@ -110,7 +110,7 @@ This concludes the sample exercises completed in class.
 I will be creating 3 plots analyzing the Konza NEON data to practice using `dplyer`
 and `ggplot2` to explore and analyze data
 
-## Figure 1 - Diversity by subplot
+## Figure 0 - Diversity by subplot (deprecated)
 This figure explores the relative species variation of the subplots observed in the NEON data.
 
 ```{r}
@@ -129,5 +129,14 @@ konza_data %>%
 I am abandoning this figure, I have wasted too much time hyper fixated on how to
 format discrete data into something usable for the x-axis of my plot.
 
+## Figure 1 -
+```{r}
+#|llabel: idk-yet
+  
+konza_data %>%
+  filter(!is.na(otherVariables)) %>%
+  ggplot(aes(x = otherVariables)) +
+  geom_bar(na.rm = TRUE,)
+```
 
 
