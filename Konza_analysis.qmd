@@ -129,9 +129,13 @@ konza_data %>%
 I am abandoning this figure, I have wasted too much time hyper fixated on how to
 format discrete data into something usable for the x-axis of my plot.
 
-## Figure 1 -
+## Figure 1 - Land Cover Variables
+This simple figure displays the counts of observations for each type of ground cover variable. 
+This figure could be used in the first steps of data exploration to guide one towards a particular
+feature they may be interested in.
+
 ```{r}
-#|llabel: Land Cover Variables
+#|llabel: land-cover-variables
   
 konza_data %>%
   filter(!is.na(otherVariables)) %>%
@@ -144,5 +148,19 @@ konza_data %>%
                margin = margin(t = 50, unit = "pt"),
               angle = 80))
 ```
+## Figure 2 - Relationship between elevation and surface variables
+This figure aims to discover a relationship between surface rock presence and elevation.
 
+```{r}
+konza_data %>%
+  filter(!is.na(otherVariables)) %>%
+  ggplot(aes(y = elevation, x = otherVariables, colour = otherVariables)) +
+         geom_point(
+           na.rm = FALSE,
+           position = position_jitterdodge(jitter.width = .1)) +
+           theme(
+             axis.text.x.bottom = element_text(
+               margin = margin(t = 50, b = -45, unit = "pt"),
+              angle = 80))
+```
 
